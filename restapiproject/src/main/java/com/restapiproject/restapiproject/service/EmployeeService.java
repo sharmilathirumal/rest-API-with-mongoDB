@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -34,4 +35,19 @@ public class EmployeeService {
         employeeRepository.deleteById(id);
     }
 
+    public Employee updateEmployee(String id,Employee updatedEmployee){
+        Optional<Employee> exsistingemployee = employeeRepository.findById(id);
+
+        if(exsistingemployee.isPresent()){
+            Employee employee = exsistingemployee.get();
+            employee.setFirst_Name(updatedEmployee.getFirst_Name());
+            employee.setLast_Name(updatedEmployee.getLast_Name());
+            employee.setEmail(updatedEmployee.getEmail());
+            employee.setLocation(updatedEmployee.getLocation());
+            return employeeRepository.save(employee);
+        }
+        else{
+            throw new RuntimeException("No Employee peresend with this id:" +id);
+        }
+    }
 }

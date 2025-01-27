@@ -27,4 +27,36 @@ public class Employee {
 
     @JsonProperty("location")
     private String location;
+
+    public String getFirst_Name() {
+        return first_Name;
+    }
+
+    public String getLast_Name() {
+        return last_Name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setFirst_Name(String first_Name) {
+        this.first_Name = first_Name;
+    }
+
+    public void setLast_Name(String last_Name) {
+        this.last_Name = last_Name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 }

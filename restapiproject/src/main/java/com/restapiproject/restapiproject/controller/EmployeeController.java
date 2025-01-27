@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/employees")
+@RequestMapping("/api/employees")
 public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
@@ -19,7 +19,7 @@ public class EmployeeController {
         return "employee details successfully";
     }
 
-    @PostMapping
+    @PostMapping("/addEmployees")
     public String saveEmployees(@RequestBody List<Employee> employees){
         employeeService.saveAllEmployee(employees);
         return "employees details successfully";
@@ -30,12 +30,16 @@ public class EmployeeController {
        return employeeService.getEmployeeById(id);
     }
 
-    @GetMapping("displayAll")
+    @GetMapping("/displayAll")
     public List<Employee> displayEmployees(){
         return employeeService.getEmployees();
     }
 
-    @DeleteMapping("deleteEmployeeById/{id}")
+    @PutMapping("/updateDetails/{id}")
+    public Employee updateEmployeeDetails(@PathVariable String id,@RequestBody Employee updatedDetails){
+      return   employeeService.updateEmployee(id,updatedDetails);
+    }
+    @DeleteMapping("/deleteEmployeeById/{id}")
     public String deleteEmployeeById(String id){
         employeeService.deleteEmployeeById(id);
         return "employee detail deleted successfully";
